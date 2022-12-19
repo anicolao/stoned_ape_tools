@@ -17,6 +17,7 @@ const image_url = (str) => {
   const images =
     "(.)(gif|jpe?g|tiff?|png|webp|bmp|GIF|JPE?G|TIFF?|PNG|WEBP|BMP)$";
   let regex = new RegExp(protocol + domains + content + images);
+  let unused = "foo";
   return regex.test(safe_str);
 };
 
@@ -503,8 +504,7 @@ function NeptunesPrideAgent() {
   };
 
   if (!String.prototype.format) {
-    String.prototype.format = function () {
-      var args = arguments;
+    String.prototype.format = function (...args) {
       return this.replace(/{(\d+)}/g, function (match, number) {
         if (typeof args[number] === "number") {
           return Math.trunc(args[number] * 1000) / 1000;
